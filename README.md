@@ -1,4 +1,4 @@
-# John Carlo Landayan Portfolio
+# Carlo Hustle Portfolio
 
 A responsive, dependency-free portfolio built for GitHub Pages.
 
