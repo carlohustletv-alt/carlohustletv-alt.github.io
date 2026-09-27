@@ -239,11 +239,16 @@ nav a:hover::after { width: 100%; }
 .project-display { display: grid; grid-template-columns: 1.3fr 1fr; min-height: 520px; }
 .project-display .project-visual, .project-display .project-copy { transition: opacity .18s ease, background .4s; }
 .project-display.switching .project-visual, .project-display.switching .project-copy { opacity: .2; }
-.project-visual { position: relative; overflow: hidden; background: #102f26; transition: background .4s; }
-.project-display[data-theme="water"] .project-visual { background: #12343d; }
-.project-display[data-theme="vision"] .project-visual { background: #342c1b; }
-.project-display[data-theme="solar"] .project-visual { background: #3b2820; }
+.project-visual { position: relative; overflow: hidden; background: #102f26; transition: background .4s; isolation: isolate; }
+.project-display[data-theme="water"] .project-visual { background: #092e38; }
+.project-display[data-theme="vision"] .project-visual { background: #26341d; }
+.project-display[data-theme="solar"] .project-visual { background: #38251d; }
 .visual-grid { opacity: .18; background-size: 42px 42px; mask-image: none; }
+.visual-scene { position: absolute; inset: 0; opacity: 0; transform: scale(.97); transition: opacity .4s ease, transform .5s ease; pointer-events: none; }
+.project-display[data-theme="pest"] .scene-pest,
+.project-display[data-theme="water"] .scene-water,
+.project-display[data-theme="vision"] .scene-vision,
+.project-display[data-theme="solar"] .scene-solar { opacity: 1; transform: scale(1); }
 .terrain { position: absolute; bottom: 0; left: 0; width: 100%; height: 75%; fill: none; stroke: rgba(200,255,61,.3); stroke-width: 2; }
 .terrain path:last-child { stroke: rgba(120,230,177,.15); }
 .scan-line { position: absolute; z-index: 2; top: -10%; left: 0; width: 100%; height: 2px; background: var(--acid); box-shadow: 0 0 18px var(--acid); animation: scan 4s ease-in-out infinite; }
@@ -257,7 +262,48 @@ nav a:hover::after { width: 100%; }
 .data-tag { position: absolute; z-index: 3; padding: 7px 9px; color: var(--acid); background: rgba(6,24,19,.8); font: 400 8px var(--mono); }
 .tag-a { top: 19%; left: 26%; }
 .tag-b { right: 6%; bottom: 10%; }
+
+.water-readout { position: absolute; top: 12%; left: 9%; display: grid; color: #a8f1ff; font-family: var(--mono); }
+.water-readout span, .water-readout small { font-size: 8px; letter-spacing: .12em; }
+.water-readout strong { margin: 5px 0 -3px; font-size: clamp(55px, 6vw, 86px); line-height: 1; font-weight: 300; letter-spacing: -.08em; }
+.water-readout small { color: rgba(168,241,255,.5); }
+.soil-profile { position: absolute; inset: 40% 0 0; overflow: hidden; border-top: 1px solid rgba(168,241,255,.5); background: linear-gradient(rgba(20,80,87,.3),rgba(3,24,29,.8)); }
+.soil-profile i { position: absolute; left: -5%; width: 110%; height: 1px; background: rgba(168,241,255,.18); transform: rotate(-2deg); }
+.soil-profile i:nth-child(1) { top: 14%; }.soil-profile i:nth-child(2) { top: 30%; }.soil-profile i:nth-child(3) { top: 49%; }.soil-profile i:nth-child(4) { top: 68%; }.soil-profile i:nth-child(5) { top: 87%; }
+.sensor-probe { position: absolute; z-index: 2; top: 18%; left: 59%; width: 22px; height: 67%; border: 1px solid #a8f1ff; background: #0a333a; }
+.sensor-probe::before { content: "TENSIOMETER / 01"; position: absolute; top: -18px; left: -38px; width: 110px; color: rgba(168,241,255,.7); font: 400 7px var(--mono); }
+.sensor-probe span { position: absolute; top: 13px; left: 5px; width: 10px; height: 48%; background: linear-gradient(transparent, #51d0e7); }
+.sensor-probe b { position: absolute; left: -7px; bottom: -15px; width: 34px; height: 34px; border: 1px solid #a8f1ff; border-radius: 50%; }
+.moisture-pulse { position: absolute; z-index: 3; left: calc(59% - 40px); bottom: 4%; width: 100px; height: 100px; border: 1px solid #51d0e7; border-radius: 50%; animation: moisturePulse 2.6s ease-out infinite; }
+.pulse-two { animation-delay: 1.3s; }
+.water-status { position: absolute; right: 5%; bottom: 5%; padding: 8px 10px; color: #a8f1ff; border: 1px solid rgba(168,241,255,.4); font: 400 8px var(--mono); }
+
+.field-map { position: absolute; inset: 8%; display: grid; grid-template-columns: repeat(4,1fr); grid-template-rows: repeat(3,1fr); gap: 7px; transform: perspective(700px) rotateX(57deg) rotateZ(-12deg) scale(1.08); }
+.field-map i { background: #789e2d; border: 1px solid rgba(218,255,134,.35); box-shadow: inset 0 0 24px rgba(13,40,8,.5); }
+.field-map i:nth-child(3n) { background: #b0c94d; }.field-map i:nth-child(4n+1) { background: #466d26; }.field-map i:nth-child(7) { background: #b86435; }
+.drone-reticle { position: absolute; z-index: 3; top: 34%; left: 47%; width: 82px; height: 82px; border: 1px solid #e6ff91; border-radius: 50%; animation: mapTarget 4s ease-in-out infinite; }
+.drone-reticle::before, .drone-reticle::after { content: ""; position: absolute; background: #e6ff91; }
+.drone-reticle::before { top: 50%; left: -18px; width: 118px; height: 1px; }.drone-reticle::after { left: 50%; top: -18px; height: 118px; width: 1px; }
+.drone-reticle span { position: absolute; inset: 29px; background: #e6ff91; transform: rotate(45deg); }
+.flight-path { position: absolute; inset: 16% 13%; border: 1px dashed rgba(230,255,145,.7); border-radius: 50%; transform: rotate(-14deg); }
+.map-key { position: absolute; z-index: 4; left: 5%; bottom: 6%; display: flex; align-items: center; gap: 3px; padding: 10px; background: rgba(6,24,19,.85); font: 400 7px var(--mono); }
+.map-key span { margin-right: 7px; }.map-key i { width: 20px; height: 7px; background: #b86435; }.map-key i:nth-of-type(2) { background: #71862d; }.map-key i:nth-of-type(3) { background: #9cbf3b; }.map-key i:nth-of-type(4) { background: #d8ef79; }.map-key b { margin-left: 8px; font-weight: 400; color: rgba(255,255,255,.6); }
+.vision-coordinates { position: absolute; top: 5%; right: 4%; font: 400 7px var(--mono); color: #e6ff91; }
+
+.solar-orb { position: absolute; top: 9%; right: 11%; width: 90px; height: 90px; border: 1px solid #ffae65; border-radius: 50%; box-shadow: 0 0 60px rgba(255,120,79,.24), inset 0 0 40px rgba(255,174,101,.17); animation: solarPulse 3s ease-in-out infinite; }
+.solar-orb::before, .solar-orb::after { content: ""; position: absolute; inset: -18px; border: 1px dashed rgba(255,174,101,.3); border-radius: 50%; }
+.solar-orb::after { inset: 24px; background: #ffae65; border: 0; }
+.panel-array { position: absolute; z-index: 2; left: 8%; bottom: 9%; width: 55%; display: grid; grid-template-columns: repeat(4,1fr); gap: 5px; transform: perspective(500px) rotateX(56deg) skewX(-9deg); }
+.panel-array i { height: 72px; border: 1px solid #ffae65; background: repeating-linear-gradient(90deg, transparent 0 15px, rgba(255,174,101,.2) 16px), repeating-linear-gradient(0deg, #132c30 0 15px, rgba(255,174,101,.25) 16px); }
+.energy-flow { position: absolute; z-index: 3; inset: 0; width: 100%; height: 100%; fill: rgba(255,174,101,.8); stroke: #ffae65; stroke-width: 1.5; stroke-dasharray: 8 10; animation: energyDash 1.4s linear infinite; }
+.power-readout { position: absolute; z-index: 4; top: 12%; left: 8%; color: #ffd6a9; font-family: var(--mono); }
+.power-readout span { display: block; font-size: 8px; letter-spacing: .14em; }.power-readout strong { font-size: clamp(52px,6vw,82px); line-height: 1; font-weight: 300; letter-spacing: -.08em; }.power-readout small { margin-left: 7px; font-size: 10px; }
+.battery-state { position: absolute; z-index: 4; right: 7%; bottom: 8%; width: 120px; padding: 5px; border: 1px solid rgba(255,214,169,.5); }
+.battery-state span { display: block; width: 82%; height: 12px; background: #ffae65; }.battery-state b { display: block; margin-top: 7px; color: #ffd6a9; font: 400 7px var(--mono); }
 .project-copy { display: flex; flex-direction: column; justify-content: center; padding: clamp(35px, 5vw, 75px); background: #e3e7d9; color: var(--ink); }
+.project-display[data-theme="water"] .project-copy { background: #d9e9e7; }
+.project-display[data-theme="vision"] .project-copy { background: #e7e6ca; }
+.project-display[data-theme="solar"] .project-copy { background: #eee0d2; }
 .project-type { color: #60746d; }
 .project-copy h3 { margin: 24px 0; font-size: clamp(31px, 3.4vw, 52px); line-height: 1.04; letter-spacing: -.05em; }
 .project-copy > p:not(.project-type) { color: #52675f; font-size: 14px; line-height: 1.8; }
@@ -359,6 +405,10 @@ footer a { text-decoration: none; }
 @keyframes pulse { 50% { box-shadow: 0 0 0 9px rgba(200,255,61,0); } }
 @keyframes scan { 0%,100% { top: 3%; opacity: .1; } 50% { top: 96%; opacity: 1; } }
 @keyframes marquee { to { transform: translateX(-50%); } }
+@keyframes moisturePulse { from { transform: scale(.2); opacity: .9; } to { transform: scale(1.5); opacity: 0; } }
+@keyframes mapTarget { 50% { transform: translate(35px,-24px) scale(.82); } }
+@keyframes solarPulse { 50% { box-shadow: 0 0 90px rgba(255,120,79,.4), inset 0 0 50px rgba(255,174,101,.25); transform: scale(1.04); } }
+@keyframes energyDash { to { stroke-dashoffset: -36; } }
 
 @media (max-width: 1100px) {
   .hero-copy { left: 6vw; width: 58vw; }

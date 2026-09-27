@@ -107,16 +107,51 @@
 
         <div class="project-display" id="project-display" data-theme="pest" role="tabpanel" aria-live="polite">
           <div class="project-visual" aria-hidden="true">
-            <div class="scan-line"></div>
             <div class="visual-grid"></div>
-            <div class="target target-a"><span></span></div>
-            <div class="target target-b"><span></span></div>
-            <div class="data-tag tag-a">OBJECT / 0.94</div>
-            <div class="data-tag tag-b">ANALYSIS / LIVE</div>
-            <svg class="terrain" viewBox="0 0 800 420" preserveAspectRatio="none">
-              <path d="M0 330C100 280 170 370 270 300S440 220 530 300 690 350 800 240"></path>
-              <path d="M0 380C100 330 210 400 330 340S510 270 620 340 730 320 800 300"></path>
-            </svg>
+
+            <div class="visual-scene scene-pest">
+              <div class="scan-line"></div>
+              <div class="target target-a"><span></span></div>
+              <div class="target target-b"><span></span></div>
+              <div class="data-tag tag-a">OBJECT / 0.94</div>
+              <div class="data-tag tag-b">ANALYSIS / LIVE</div>
+              <svg class="terrain" viewBox="0 0 800 420" preserveAspectRatio="none">
+                <path d="M0 330C100 280 170 370 270 300S440 220 530 300 690 350 800 240"></path>
+                <path d="M0 380C100 330 210 400 330 340S510 270 620 340 730 320 800 300"></path>
+              </svg>
+            </div>
+
+            <div class="visual-scene scene-water">
+              <div class="water-readout"><span>SOIL TENSION</span><strong>−32</strong><small>kPa / ROOT ZONE</small></div>
+              <div class="soil-profile"><i></i><i></i><i></i><i></i><i></i></div>
+              <div class="sensor-probe"><span></span><b></b></div>
+              <div class="moisture-pulse pulse-one"></div>
+              <div class="moisture-pulse pulse-two"></div>
+              <div class="water-status">IRRIGATION / HOLD</div>
+            </div>
+
+            <div class="visual-scene scene-vision">
+              <div class="field-map">
+                <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+              </div>
+              <div class="drone-reticle"><span></span></div>
+              <div class="flight-path"></div>
+              <div class="map-key"><span>NDVI</span><i></i><i></i><i></i><i></i><b>0.18 — 0.91</b></div>
+              <div class="vision-coordinates">15.7293° N / 120.8729° E</div>
+            </div>
+
+            <div class="visual-scene scene-solar">
+              <div class="solar-orb"><span></span></div>
+              <div class="panel-array">
+                <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+              </div>
+              <svg class="energy-flow" viewBox="0 0 620 360" preserveAspectRatio="none">
+                <path d="M30 95H180V250H390V150H590"></path>
+                <circle cx="180" cy="250" r="5"></circle><circle cx="390" cy="150" r="5"></circle>
+              </svg>
+              <div class="power-readout"><span>LIVE YIELD</span><strong>8.42</strong><small>kW</small></div>
+              <div class="battery-state"><span></span><b>82% / STORAGE</b></div>
+            </div>
           </div>
           <div class="project-copy">
             <p class="project-type">AI / COMPUTER VISION / FIELD MONITORING</p>
