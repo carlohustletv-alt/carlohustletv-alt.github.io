@@ -140,7 +140,7 @@ nav a:hover::after { width: 100%; }
   z-index: 2;
   top: 50%;
   left: clamp(24px, 8vw, 130px);
-  width: min(760px, 57vw);
+  width: min(980px, 62vw);
   transform: translateY(-49%);
 }
 
@@ -155,13 +155,14 @@ nav a:hover::after { width: 100%; }
 
 .hero h1 {
   margin: 28px 0 27px;
-  font-size: clamp(64px, 7.4vw, 124px);
+  font-size: clamp(64px, 6.2vw, 112px);
   line-height: .88;
   letter-spacing: -.075em;
   font-weight: 600;
 }
 
 .text-gradient {
+  white-space: nowrap;
   color: transparent;
   background: linear-gradient(110deg, var(--acid), var(--mint) 60%, #eefac7);
   background-clip: text;
@@ -349,6 +350,8 @@ footer a { text-decoration: none; }
 
 .js .reveal { opacity: 0; transform: translateY(35px); transition: opacity .8s ease, transform .8s cubic-bezier(.2,.7,.2,1); }
 .js .reveal.visible { opacity: 1; transform: translateY(0); }
+.js .hero-copy.reveal { transform: translateY(calc(-49% + 35px)); }
+.js .hero-copy.reveal.visible { transform: translateY(-49%); }
 .js .field-card.reveal { transform: translateY(calc(-49% + 35px)) rotate(2deg); }
 .js .field-card.reveal.visible { transform: translateY(-49%) rotate(2deg); }
 
@@ -382,9 +385,12 @@ footer a { text-decoration: none; }
   .hero { height: auto; min-height: 900px; padding: 130px 20px 110px; }
   .hero-copy { position: relative; top: auto; left: auto; width: 100%; transform: none; }
   .hero h1 { margin-top: 25px; font-size: clamp(56px,17vw,82px); }
+  .text-gradient { white-space: normal; }
   .hero-actions { flex-direction: column; align-items: stretch; }
   .button { width: 100%; }
   .field-card { position: relative; top: auto; right: auto; width: min(100%, 410px); margin: 70px auto 0; transform: rotate(1.5deg); }
+  .js .hero-copy.reveal { transform: translateY(35px); }
+  .js .hero-copy.reveal.visible { transform: translateY(0); }
   .js .field-card.reveal { transform: translateY(35px) rotate(1.5deg); }
   .js .field-card.reveal.visible { transform: rotate(1.5deg); }
   .signal-strip { grid-template-columns: repeat(2,1fr); gap: 12px; padding: 18px 20px; }
